@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_x86
+name: Build_OP_jdc_ax1800pro
 
 # Add a button to trigger the workflow
 on: 
@@ -47,13 +47,19 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
-
+        echo "src-git kenzok8 https://github.com/kenzok8/small-package.git" >> ./feeds.conf.default
+        
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
+
+    #- name: Import external feeds - JerryKuKu Argon
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon-jerrykuku
 
     #- name: Import external feeds - passwall
     #  working-directory: ./openwrt
@@ -66,9 +72,9 @@ jobs:
     #  run: |
     #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon-jerrykuku
 
-    - name: Configuration Customization - Build_x86
+    - name: Configuration Customization - Build_jdc_ax1800pro
       env:
-        CONFIG_FILE: 'x86.config'
+        CONFIG_FILE: 'config_jdc_ax1800pro.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
