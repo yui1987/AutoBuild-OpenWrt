@@ -54,6 +54,3 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/l
 # 依赖
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages shadowsocksr-libev
 git_sparse_clone master https://github.com/coolsnowwolf/packages net/shadowsocks-libev
-
-./scripts/feeds update -a
-./scripts/feeds install -a
